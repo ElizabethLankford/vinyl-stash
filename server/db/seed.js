@@ -4,11 +4,11 @@ async function dropTables() {
   try {
     console.log("Dropping All Tables...");
     await client.query(`
-        DROP TABLE IF EXISTS user;
-        DROP TABLE IF EXISTS vinyl;
-        DROP TABLE IF EXISTS household;
-        `);
+    DROP TABLE IF EXISTS user CASCADE;
+    DROP TABLE IF EXISTS vinyl CASCADE;
+    `);
   } catch (error) {
+    console.log("error dropping tables");
     throw error;
   }
 }
@@ -21,7 +21,7 @@ async function createTables() {
             id SERIAL PRIMARY KEY,
             username VARCHAR(20) UNIQUE NOT NULL,
             password TEXT NOT NULL,
-            name VARCHAR(20) NOT NULL,
+            name VARCHAR(20) NOT NULL
         );
         CREATE TABLE vinyl (
             id SERIAL PRIMARY KEY,
@@ -29,7 +29,7 @@ async function createTables() {
             artist VARCHAR(100) NOT NULL,
             image TEXT,
             genre VARCHAT(50),
-            user_id INTEGER REFERENCES user(id) NOT NULL,
+            user_id INTEGER REFERENCES user(id) NOT NULL
         );
         `);
     console.log("Tables successfully created!");
