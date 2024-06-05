@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("Home path WORKS!!!!");
 });
 
-//app.use("/api", require("./api"));
+app.use("/api", require("./api"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
